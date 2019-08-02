@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.zsk.idlefish.base.BaseFragment;
+
 import java.util.List;
 
 /**
@@ -13,8 +15,8 @@ import java.util.List;
  */
 
 public class MainFragmentAdapter extends FragmentStatePagerAdapter {
-    private List<Fragment> list;
-    public MainFragmentAdapter(FragmentManager fm, List<Fragment> list) {
+    private List<BaseFragment> list;
+    public MainFragmentAdapter(FragmentManager fm, List<BaseFragment> list) {
         super(fm);
         this.list = list;
     }

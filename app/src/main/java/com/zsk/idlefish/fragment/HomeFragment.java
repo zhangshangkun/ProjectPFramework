@@ -7,18 +7,30 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zsk.idlefish.R;
+import com.zsk.idlefish.base.BaseFragment;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
     public static HomeFragment newInstance() {
-        Bundle args = new Bundle();
         HomeFragment fragment = new HomeFragment();
-        fragment.setArguments(args);
         return fragment;
+    }
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_home;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    protected void initView(View convertView, Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void getData() {
+
     }
 }

@@ -34,9 +34,9 @@
             android:textColor="@color/tab_selector_tv_color" />
 
         <RadioButton
-            android:id="@+id/plus"
+            android:id="@+id/release"
             style="@style/radioStyle"
-            android:drawableTop="@mipmap/comui_tab_post"
+            android:drawableTop="@mipmap/ui_tab_post"
             android:textColor="@color/tab_selector_tv_color" />
 
         <RadioButton
