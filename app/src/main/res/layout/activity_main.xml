@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zsk.idlefish.view.NoScrollViewPager
+        android:id="@+id/vp_main_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/home"
+            style="@style/radioStyle"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_home"
+            android:paddingTop="14dp"
+            android:text="首页"
+            android:textColor="@color/tab_selector_tv_color" />
+
+        <RadioButton
+            android:id="@+id/find"
+            style="@style/radioStyle"
+            android:drawableTop="@drawable/selector_find"
+            android:paddingTop="14dp"
+            android:text="发现"
+            android:textColor="@color/tab_selector_tv_color" />
+
+        <RadioButton
+            android:id="@+id/plus"
+            style="@style/radioStyle"
+            android:drawableTop="@mipmap/comui_tab_post"
+            android:textColor="@color/tab_selector_tv_color" />
+
+        <RadioButton
+            android:id="@+id/message"
+            style="@style/radioStyle"
+            android:drawableTop="@drawable/selector_message"
+            android:paddingTop="14dp"
+            android:text="消息"
+            android:textColor="@color/tab_selector_tv_color" />
+
+        <RadioButton
+            android:id="@+id/mine"
+            style="@style/radioStyle"
+            android:drawableTop="@drawable/selector_mine"
+            android:paddingTop="14dp"
+            android:text="我的"
+            android:textColor="@color/tab_selector_tv_color" />
+    </RadioGroup>
+</RelativeLayout>
