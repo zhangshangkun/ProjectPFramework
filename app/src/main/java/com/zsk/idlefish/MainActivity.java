@@ -13,10 +13,8 @@ import com.zsk.idlefish.fragment.MessageFragment;
 import com.zsk.idlefish.fragment.MineFragment;
 import com.zsk.idlefish.fragment.ReleaseFragment;
 import com.zsk.idlefish.view.NoScrollViewPager;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {

@@ -11,6 +11,11 @@ import androidx.annotation.Nullable;
 
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 import com.zsk.idlefish.R;
+import com.zsk.idlefish.tools.AppManager;
+import com.zsk.idlefish.tools.NetChangeObserver;
+import com.zsk.idlefish.tools.NetStateReceiver;
+import com.zsk.idlefish.utils.NetStatusUtil;
+import com.zsk.idlefish.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -27,18 +32,47 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     private LinearLayout submit;
     private TextView mSubmitTv;
     private View mBg;
-
+     //网络观察者
+    protected NetChangeObserver mNetChangeObserver = null;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        AppManager.getInstance().addActivity(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(getLayoutId());
         mUnbind = ButterKnife.bind(this);
         initView(savedInstanceState);
         initData();
         EventBus.getDefault().register(this);
+        mNetChangeObserver = new NetChangeObserver() {
+            @Override
+            public void onNetConnected(NetStatusUtil.NetState type) {
+                onNetworkConnected(type);
+            }
+
+            @Override
+            public void onNetDisConnect() {
+                onNetworkDisConnected();
+            }
+        };
+        //开启广播去监听 网络 改变事件
+        NetStateReceiver.registerObserver(mNetChangeObserver);
     }
+    /**
+     * 网络连接状态
+     * @param type 网络状态
+     */
+    protected void onNetworkConnected(NetStatusUtil.NetState type) {
+
+    }
+    /**
+     * 网络断开的时候调用
+     */
+    protected void onNetworkDisConnected() {
+        ToastUtils.showNormal("当前未连接到网络");
+    }
+
     //初始化标题栏的信息
     public void initActionBar(CharSequence message) {
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
@@ -49,10 +83,10 @@ public abstract class BaseActivity extends RxAppCompatActivity {
             }
         });
         // 标题
-        mTitle =  (TextView) findViewById(R.id.title_text);
+        mTitle =  findViewById(R.id.title_text);
         mTitle.setText(message);
-        submit =  (LinearLayout) findViewById(R.id.submitButton);
-        mSubmitTv =  (TextView) findViewById(R.id.submitText);
+        submit =   findViewById(R.id.submitButton);
+        mSubmitTv = findViewById(R.id.submitText);
         mBg =  findViewById(R.id.main_header_1);
 
     }
@@ -69,6 +103,9 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     //得到actionbar的提交按钮
     public LinearLayout setSubmitListener() {
         return submit;
+    }
+    protected void T(String msg) {
+        ToastUtils.showNormal(msg);
     }
     /**
      * 加载页面布局ID
@@ -103,6 +140,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        AppManager.getInstance().remove(this);
         mUnbind.unbind();
     }
 
